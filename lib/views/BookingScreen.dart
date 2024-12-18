@@ -1,3 +1,5 @@
+import 'package:bus_ticketing_app/config/app_routes/app_routes.dart';
+import 'package:bus_ticketing_app/model/ticket.dart';
 import 'package:bus_ticketing_app/widget/button/dark_rounded_button.dart';
 import 'package:bus_ticketing_app/widget/input/date_field.dart';
 import 'package:bus_ticketing_app/widget/input/location_dropdown.dart';
@@ -16,6 +18,7 @@ class _BookingscreenState extends State<Bookingscreen> {
   final TextEditingController _paxController = TextEditingController();
   final TextEditingController _farePerPersonController =
       TextEditingController(text: "Rs.0");
+  final TextEditingController _dateController = TextEditingController();
   final List<String> destinationList = <String>[
     'Pokhara',
     'Kathmandu',
@@ -162,17 +165,19 @@ class _BookingscreenState extends State<Bookingscreen> {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: DateField(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: DateField(
+                  dobController: _dateController,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: DarkRoundedButton(
                   title: "Book Now",
                   onPressed: () {
-                    // calculateFareAndMutate();
-                    // navigate();
+                    Navigator.of(context).pushNamed(AppRoutes.billing,
+                        arguments: createTicket());
                   },
                 ),
               ),
@@ -183,7 +188,13 @@ class _BookingscreenState extends State<Bookingscreen> {
     );
   }
 
-  calculateFare() {
-    return ("${tripToPriceMapper[destination]! * int.parse(_paxController.text)}");
+  Ticket createTicket() {
+    return Ticket(
+        from: from,
+        departure: _dateController.text,
+        pax: int.parse(_paxController.text),
+        destination: destination!,
+        price: (tripToPriceMapper[destination]! *
+            double.parse(_paxController.text)));
   }
 }
