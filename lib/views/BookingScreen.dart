@@ -33,6 +33,7 @@ class _BookingscreenState extends State<Bookingscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(255, 248, 248, 1),
       appBar: AppBar(
         leadingWidth: double.infinity,
         leading: const Padding(

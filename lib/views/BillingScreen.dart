@@ -8,6 +8,7 @@ class Billingscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(255, 248, 248, 1),
       appBar: AppBar(
         leadingWidth: double.infinity,
         leading: const Padding(
@@ -66,52 +67,110 @@ class Billingscreen extends StatelessWidget {
                     color: Colors.white,
                     border: Border.all(
                       width: 0.4,
-                      color: const Color.fromRGBO(0, 0, 0, 10),
+                      color: const Color.fromRGBO(0, 0, 0, 0.5),
                     ),
                     borderRadius: BorderRadius.circular(28),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
+                  child: SizedBox(
+                    height: 200,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            ticket.from,
-                          ),
-                          Container(
-                            height: 5,
-                            width: 32,
-                            color: Colors.black,
-                          ),
-                          Text(
-                            ticket.destination,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Column(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
-                                "Passengers",
+                              Text(
+                                ticket.from,
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(0, 27, 108, 1),
+                                  fontSize: 22,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: const Color.fromRGBO(0, 27, 108, 1),
+                                  ),
+                                  height: 5,
+                                  width: 32,
+                                ),
                               ),
                               Text(
-                                "${ticket.pax} Adults",
+                                ticket.destination,
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(0, 27, 108, 1),
+                                  fontSize: 22,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Passengers",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(113, 108, 108, 1),
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${ticket.pax} Adults",
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(0, 27, 108, 1),
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  const Text(
+                                    "Departure",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(113, 108, 108, 1),
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Text(
+                                    ticket.departure,
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(0, 27, 108, 1),
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                           Column(
                             children: [
                               const Text(
-                                "Passengers",
+                                "Total:",
+                                style: TextStyle(
+                                  color: Color.fromRGBO(113, 108, 108, 1),
+                                  fontSize: 18,
+                                ),
                               ),
                               Text(
-                                "${ticket.pax} Adults",
+                                ticket.price.toString(),
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(0, 27, 108, 1),
+                                  fontSize: 22,
+                                ),
                               ),
                             ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],
